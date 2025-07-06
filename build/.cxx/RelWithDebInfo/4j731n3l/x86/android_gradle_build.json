@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/home/ubuntu/flutter/packages/flutter_tools/gradle/src/main/scripts/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/ubuntu/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/ubuntu/Fluterone_project/Fluterone_project_root/build/.cxx/RelWithDebInfo/4j731n3l/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/ubuntu/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/ubuntu/Fluterone_project/Fluterone_project_root/build/.cxx/RelWithDebInfo/4j731n3l/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/home/ubuntu/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/home/ubuntu/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}
