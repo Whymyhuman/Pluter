@@ -19,6 +19,11 @@ void main() {
     await UserPreferences.init();
   });
 
+  setUp(() {
+    // Set a larger test size for all tests to accommodate the UI
+    TestWidgetsFlutterBinding.ensureInitialized();
+  });
+
   testWidgets('App loads with bottom navigation', (WidgetTester tester) async {
     // Set a larger test size to accommodate the UI
     tester.view.physicalSize = const Size(800, 1200);
@@ -107,11 +112,16 @@ void main() {
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
+    // Scroll to make sure the button is visible
+    await tester.ensureVisible(find.text('Show Love'));
+    await tester.pumpAndSettle();
+
     // Find and tap the Show Love button
     await tester.tap(find.text('Show Love'));
     await tester.pumpAndSettle();
 
     // Verify that a snackbar appears with the correct message
+    // Check for the actual snackbar message from the home screen
     expect(find.textContaining('Rem loves your attention'), findsOneWidget);
     
     // Reset the test size
@@ -124,6 +134,10 @@ void main() {
     tester.view.devicePixelRatio = 1.0;
     
     await tester.pumpWidget(const MyWaifuApp());
+    await tester.pumpAndSettle();
+
+    // Scroll to make sure the button is visible
+    await tester.ensureVisible(find.text('Talk'));
     await tester.pumpAndSettle();
 
     // Find and tap the Talk button
