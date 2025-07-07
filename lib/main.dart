@@ -257,7 +257,7 @@ class _WaifuHomePageState extends State<WaifuHomePage> with TickerProviderStateM
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Waifu App"),
+        title: const Text('My Waifu App'),
         backgroundColor: theme.colorScheme.inversePrimary,
         centerTitle: true,
       ),

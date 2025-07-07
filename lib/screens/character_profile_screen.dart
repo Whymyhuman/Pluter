@@ -33,7 +33,7 @@ class _CharacterProfileScreenState extends State<CharacterProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${CharacterData.characterName}\'s Profile'),
+        title: const Text('Rem\'s Profile'),
         backgroundColor: theme.colorScheme.inversePrimary,
         centerTitle: true,
       ),

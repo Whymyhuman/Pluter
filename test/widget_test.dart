@@ -10,11 +10,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:my_waifu_app/main.dart';
+import 'package:my_waifu_app/services/user_preferences.dart';
 
 void main() {
   setUpAll(() async {
     // Mock SharedPreferences for testing
     SharedPreferences.setMockInitialValues({});
+    await UserPreferences.init();
   });
 
   testWidgets('App loads with bottom navigation', (WidgetTester tester) async {
@@ -55,22 +57,22 @@ void main() {
     await tester.pumpAndSettle();
 
     // Navigate to Messages screen
-    await tester.tap(find.text('Messages'));
+    await tester.tap(find.byIcon(Icons.chat));
     await tester.pumpAndSettle();
     expect(find.text('Daily Messages'), findsOneWidget);
 
     // Navigate to Profile screen
-    await tester.tap(find.text('Profile'));
+    await tester.tap(find.byIcon(Icons.person));
     await tester.pumpAndSettle();
-    expect(find.text('Rem\'s Profile'), findsOneWidget);
+    expect(find.text('Rem's Profile'), findsOneWidget);
 
     // Navigate to Settings screen
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.byIcon(Icons.settings));
     await tester.pumpAndSettle();
-    expect(find.text('Settings'), findsOneWidget);
+    expect(find.text('User Settings'), findsOneWidget);
 
     // Navigate back to Home
-    await tester.tap(find.text('Home'));
+    await tester.tap(find.byIcon(Icons.home));
     await tester.pumpAndSettle();
     expect(find.text('My Waifu App'), findsOneWidget);
   });
@@ -80,7 +82,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Find and tap the Show Love button
-    await tester.tap(find.widgetWithText(ElevatedButton, 'Show Love').first);
+    await tester.tap(find.text('Show Love'));
     await tester.pumpAndSettle();
 
     // Verify that a snackbar appears
@@ -92,7 +94,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Find and tap the Talk button
-    await tester.tap(find.widgetWithText(ElevatedButton, 'Talk'));
+    await tester.tap(find.text('Talk'));
     await tester.pumpAndSettle();
 
     // Verify that a quote appears in the quote card
