@@ -39,7 +39,7 @@ void main() {
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
-    // Verify that Rem\'s information is displayed.
+    // Verify that Rem's information is displayed.
     expect(find.text('Rem'), findsOneWidget);
     expect(find.text('From Re:Zero - Starting Life in Another World'), findsOneWidget);
     
@@ -56,23 +56,23 @@ void main() {
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
-    // Navigate to Messages screen
-    await tester.tap(find.byIcon(Icons.chat));
+    // Navigate to Messages screen using text instead of icon to avoid ambiguity
+    await tester.tap(find.text('Messages'));
     await tester.pumpAndSettle();
     expect(find.text('Daily Messages'), findsOneWidget);
 
     // Navigate to Profile screen
-    await tester.tap(find.byIcon(Icons.person));
+    await tester.tap(find.text('Profile'));
     await tester.pumpAndSettle();
     expect(find.text('Rem\'s Profile'), findsOneWidget);
 
     // Navigate to Settings screen
-    await tester.tap(find.byIcon(Icons.settings));
+    await tester.tap(find.text('Settings'));
     await tester.pumpAndSettle();
-    expect(find.text('User Settings'), findsOneWidget);
+    expect(find.text('Your Stats'), findsOneWidget);
 
     // Navigate back to Home
-    await tester.tap(find.byIcon(Icons.home));
+    await tester.tap(find.text('Home'));
     await tester.pumpAndSettle();
     expect(find.text('My Waifu App'), findsOneWidget);
   });
@@ -81,17 +81,31 @@ void main() {
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
+    // Scroll down to ensure the Show Love button is visible and tappable
+    await tester.scrollUntilVisible(
+      find.text('Show Love'),
+      500.0,
+      scrollable: find.byType(Scrollable).first,
+    );
+
     // Find and tap the Show Love button
     await tester.tap(find.text('Show Love'));
     await tester.pumpAndSettle();
 
-    // Verify that a snackbar appears
-    expect(find.textContaining('Rem loves your attention'), findsOneWidget);
+    // Verify that a snackbar appears with the correct message
+    expect(find.text('💖 Rem loves your attention! +2 Affection'), findsOneWidget);
   });
 
   testWidgets('Talk button shows message', (WidgetTester tester) async {
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
+
+    // Scroll down to ensure the Talk button is visible
+    await tester.scrollUntilVisible(
+      find.text('Talk'),
+      500.0,
+      scrollable: find.byType(Scrollable).first,
+    );
 
     // Find and tap the Talk button
     await tester.tap(find.text('Talk'));
@@ -134,4 +148,3 @@ void main() {
     expect(find.text('About'), findsOneWidget);
   });
 }
-
