@@ -20,6 +20,10 @@ void main() {
   });
 
   testWidgets('App loads with bottom navigation', (WidgetTester tester) async {
+    // Set a larger test size to accommodate the UI
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
@@ -33,9 +37,16 @@ void main() {
     expect(find.text('Messages'), findsOneWidget);
     expect(find.text('Profile'), findsOneWidget);
     expect(find.text('Settings'), findsOneWidget);
+    
+    // Reset the test size
+    addTearDown(tester.view.reset);
   });
 
   testWidgets('Home screen displays character information', (WidgetTester tester) async {
+    // Set a larger test size to accommodate the UI
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
@@ -50,34 +61,49 @@ void main() {
     // Verify relationship status card is present.
     expect(find.text('Relationship Status'), findsOneWidget);
     expect(find.text('Affection Level'), findsOneWidget);
+    
+    // Reset the test size
+    addTearDown(tester.view.reset);
   });
 
   testWidgets('Navigation between screens works', (WidgetTester tester) async {
+    // Set a larger test size to accommodate the UI
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
-    // Navigate to Messages screen using text instead of icon to avoid ambiguity
+    // Navigate to Messages screen using bottom navigation text
     await tester.tap(find.text('Messages'));
     await tester.pumpAndSettle();
     expect(find.text('Daily Messages'), findsOneWidget);
 
-    // Navigate to Profile screen
+    // Navigate to Profile screen using bottom navigation text
     await tester.tap(find.text('Profile'));
     await tester.pumpAndSettle();
     expect(find.text('Rem\'s Profile'), findsOneWidget);
 
-    // Navigate to Settings screen
+    // Navigate to Settings screen using bottom navigation text
     await tester.tap(find.text('Settings'));
     await tester.pumpAndSettle();
-    expect(find.text('Your Stats'), findsOneWidget);
+    // Use a more specific finder for the Settings screen title in AppBar
+    expect(find.widgetWithText(AppBar, 'Settings'), findsOneWidget);
 
-    // Navigate back to Home
+    // Navigate back to Home using bottom navigation text
     await tester.tap(find.text('Home'));
     await tester.pumpAndSettle();
     expect(find.text('My Waifu App'), findsOneWidget);
+    
+    // Reset the test size
+    addTearDown(tester.view.reset);
   });
 
   testWidgets('Show Love button increases affection', (WidgetTester tester) async {
+    // Set a larger test size to accommodate the UI
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
@@ -94,9 +120,16 @@ void main() {
 
     // Verify that a snackbar appears with the correct message
     expect(find.text('💖 Rem loves your attention! +2 Affection'), findsOneWidget);
+    
+    // Reset the test size
+    addTearDown(tester.view.reset);
   });
 
   testWidgets('Talk button shows message', (WidgetTester tester) async {
+    // Set a larger test size to accommodate the UI
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
@@ -113,9 +146,16 @@ void main() {
 
     // Verify that a quote appears in the quote card
     expect(find.textContaining('Rem says:'), findsOneWidget);
+    
+    // Reset the test size
+    addTearDown(tester.view.reset);
   });
 
   testWidgets('Daily Messages screen functionality', (WidgetTester tester) async {
+    // Set a larger test size to accommodate the UI
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
@@ -131,9 +171,16 @@ void main() {
     // Test getting a new quote
     await tester.tap(find.text('New Quote'));
     await tester.pumpAndSettle();
+    
+    // Reset the test size
+    addTearDown(tester.view.reset);
   });
 
   testWidgets('Settings screen displays user stats', (WidgetTester tester) async {
+    // Set a larger test size to accommodate the UI
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
@@ -146,5 +193,8 @@ void main() {
     expect(find.text('User Settings'), findsOneWidget);
     expect(find.text('App Settings'), findsOneWidget);
     expect(find.text('About'), findsOneWidget);
+    
+    // Reset the test size
+    addTearDown(tester.view.reset);
   });
 }
