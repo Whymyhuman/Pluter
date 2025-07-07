@@ -64,7 +64,7 @@ void main() {
     // Navigate to Profile screen
     await tester.tap(find.byIcon(Icons.person));
     await tester.pumpAndSettle();
-    expect(find.text('Rem's Profile'), findsOneWidget);
+    expect(find.text('Rem\'s Profile'), findsOneWidget);
 
     // Navigate to Settings screen
     await tester.tap(find.byIcon(Icons.settings));
