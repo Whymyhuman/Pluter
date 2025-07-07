@@ -112,16 +112,18 @@ void main() {
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
-    // Scroll to make sure the button is visible
-    await tester.ensureVisible(find.text('Show Love'));
-    await tester.pumpAndSettle();
+    // Scroll down to ensure the Show Love button is visible and tappable
+    await tester.scrollUntilVisible(
+      find.text('Show Love'),
+      500.0,
+      scrollable: find.byType(Scrollable).first,
+    );
 
     // Find and tap the Show Love button
     await tester.tap(find.text('Show Love'));
     await tester.pumpAndSettle();
 
     // Verify that a snackbar appears with the correct message
-    // Check for the actual snackbar message from the home screen
     expect(find.textContaining('Rem loves your attention'), findsOneWidget);
     
     // Reset the test size
@@ -136,9 +138,12 @@ void main() {
     await tester.pumpWidget(const MyWaifuApp());
     await tester.pumpAndSettle();
 
-    // Scroll to make sure the button is visible
-    await tester.ensureVisible(find.text('Talk'));
-    await tester.pumpAndSettle();
+    // Scroll down to ensure the Talk button is visible and tappable
+    await tester.scrollUntilVisible(
+      find.text('Talk'),
+      500.0,
+      scrollable: find.byType(Scrollable).first,
+    );
 
     // Find and tap the Talk button
     await tester.tap(find.text('Talk'));
